@@ -1,0 +1,36 @@
+## Given an integer array arr[] representing the nodes of a Complete Binary Tree in level order traversal, 
+return the nodes at each level in sorted ascending order.
+
+For every level of the binary tree, sort the values present at that level independently and 
+return the resulting levels as a 2D array, where the i-th row contains the sorted values of the i-th level.
+
+Input: arr[] = [7, 6, 5, 4, 3, 2, 1]
+Output: [[7], [5, 6], [1, 2, 3, 4]]
+
+
+## python code
+
+class Solution:
+    def levelSort(self, arr):
+        
+        n=len(arr)
+        
+        res=[]
+        
+        level_size=1
+        i=0
+        
+        while i<n:
+            level=[]
+            level=arr[i:level_size+i]
+            level.sort()
+            res.append(level)
+            
+            
+            i+=level_size
+            
+            level_size*=2
+            
+        return res
+            
+        
