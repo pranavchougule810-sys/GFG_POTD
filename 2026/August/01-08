@@ -1,0 +1,39 @@
+Given three arrays a[], b[], and k[], representing m range increment operations on an array arr[] of size n, where all elements of arr[] are initially 0.
+
+Increment(a[i], b[i], k[i]) adds k[i] to each element arr[j] such that a[i] ≤ j ≤ b[i] (mainly indexes in range from a[i] to b[i])
+After performing all the given operations, find the maximum value present in the array.
+Examples:
+
+Input: n = 5, a[] = [0, 1, 2], b[] = [1, 4, 3], k[] = [100, 100, 100]
+Output: 200
+Explanation: Initially, arr = [0, 0, 0, 0, 0]
+After the first operation: arr = [100, 100, 0, 0, 0]
+After the second operation: arr = [100, 200, 100, 100, 100]
+After the third operation: arr = [100, 200, 200, 200, 100]
+The maximum element after all operations is 200.
+
+
+code python:
+
+class Solution:
+    def findMax(self, n, a, b, k):
+        # code here
+        
+        arr=[0]*(n+1)
+        
+        for i in range(len(a)):
+            arr[a[i]]+=k[i]
+            
+            if b[i]+1<len(arr):
+                arr[b[i]+1]-=k[i]
+                
+        cost=0
+        ans=0
+        
+        for i in range(n):
+            cost+=arr[i]
+            ans=max(ans,cost)
+            
+        return ans
+            
+        
