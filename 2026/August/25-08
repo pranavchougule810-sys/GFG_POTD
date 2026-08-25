@@ -16,6 +16,8 @@ Input: arr[] = [4, 3, 1, 2]
 Output: 2
 Explanation: Move 3 to the end to get [4, 1, 2, 3]. Then move 4 to the end to get [1, 2, 3, 4].
 
+#code:
+
 class Solution:
     def minMoves(self, arr):
         n=len(arr)
