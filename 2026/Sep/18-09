@@ -1,0 +1,67 @@
+Visit Leaves with Budget (https://www.geeksforgeeks.org/problems/leaf-under-budget/1)
+Solved
+Difficulty: EasyAccuracy: 50.05%Submissions: 55K+Points: 2
+Given a binary tree and an integer k, where you start from the root at level 1. The cost of visiting a leaf node is equal to the level of that leaf node. You can visit any number of leaf nodes, but the total cost of visiting them must not exceed k.
+
+Return the maximum number of leaf nodes that can be visited within the given budget.
+
+Examples:
+Input: root[] = [10, 8, 2, 3, N, 3, 6, N, N, N, 4], k = 8
+Output: 2
+Explanation:
+Cost For visiting Leaf Node 3: 3
+Cost For visiting Leaf Node 4: 4
+Cost For visiting Leaf Node 6: 3
+To maximize the number of visited leaves, choose the two cheapest leaves: Cost = 3 + 3 = 6 ≤ 8. 
+Thus, the maximum number of leaf nodes that can be visited is 2.
+
+from collections import deque
+
+''' Binary Tree Node Structure
+class Node:
+    def __init__(self,val):
+        self.data = val
+        self.left = None
+        self.right = None
+'''
+
+class Solution:
+    def getCount(self, root, k):
+        # code here
+        if root is None:
+            return 0
+        
+        q=deque()
+        q.append(root)
+        
+        level=1
+        cnt=0
+        
+        while q:
+            size=len(q)
+            leafcnt=0
+            
+            for i in range(size):
+                curr=q.popleft()
+                
+                if curr.left is None and curr.right is None:
+                    leafcnt+=1
+                    
+                if curr.left is not None:
+                    q.append(curr.left)
+                if curr.right is not None:
+                    q.append(curr.right)
+                    
+            
+            canVisit=k//level
+            take=min(leafcnt,canVisit)
+            
+            cnt+=take
+            k-=take*level
+            
+            if k<level:
+                break
+            
+            level+=1
+        
+        return cnt
